@@ -1,0 +1,19 @@
+{
+  "name": "ping-pong-server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~4.3.0",
+    "coffee-script": "~1.7.1",
+    "body-parser": "~1.2.0",
+    "request": "~2.36.0"
+  },
+  "scripts": {
+    "prestart": "coffee --compile .",
+    "start": "node server.js",
+    "dev": "nodemon --ignore node_modules/ server.coffee"
+  },
+  "devDependencies": {
+    "nodemon": "~1.0.19"
+  }
+}

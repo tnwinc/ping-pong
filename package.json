@@ -1,0 +1,8 @@
+{
+  "name": "ping-pong",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "server": "(cd server && npm run dev)"
+  }
+}
