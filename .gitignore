@@ -2,3 +2,5 @@
 node_modules
 *.log
 *.js
+_dev
+_build
