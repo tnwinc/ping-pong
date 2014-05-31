@@ -6,6 +6,7 @@
     "browserify-shim": "~3.5.0",
     "coffee-script": "~1.7.1",
     "coffeeify": "~0.6.0",
+    "connect": "~2.18.0",
     "ember-precompile": "~0.2.4",
     "gulp": "~3.6.2",
     "gulp-util": "~2.2.14",
