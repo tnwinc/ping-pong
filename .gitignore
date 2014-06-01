@@ -5,3 +5,4 @@ node_modules
 tmp
 _dev
 _build
+client/gulp/config.coffee

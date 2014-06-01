@@ -2,11 +2,12 @@ connect = require 'connect'
 portfinder = require 'portfinder'
 gutil = require 'gulp-util'
 
-module.exports = (dir)->
+module.exports = (dir, cb)->
 
   portfinder.getPort (err, port)->
     connect
-      .createServer connect.static "#{process.cwd()}/#{dir}"
+      .createServer connect.static dir
       .listen port, ->
         url = "http://localhost:#{port}"
         gutil.log "listening on #{gutil.colors.yellow url}..."
+        cb port
