@@ -8,12 +8,12 @@ emberHbsfy = require '../lib/ember-hbsfy'
 
 bundle = (bundler)->
   bundler.bundle()
-    .pipe source('bundle.js')
+    .pipe source('app.js')
     .pipe gulp.dest('./_dev/')
 
 gulp.task 'watch-scripts', ->
   bundler = watchify
-    entries: ['./src/scripts/router.coffee']
+    entries: ['./app/router.coffee']
     extensions: ['.js', '.coffee', '.hbs']
 
   bundler.transform(browserifyShim)
