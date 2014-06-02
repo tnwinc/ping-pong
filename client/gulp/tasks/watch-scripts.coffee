@@ -5,9 +5,12 @@ browserifyShim = require 'browserify-shim'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
 emberHbsfy = require '../lib/ember-hbsfy'
+handleErrors = require '../lib/handle-errors'
 
 bundle = (bundler)->
-  bundler.bundle()
+  bundler
+    .bundle()
+    .on('error', handleErrors)
     .pipe source('app.js')
     .pipe gulp.dest('./_dev/')
 
@@ -16,7 +19,8 @@ gulp.task 'watch-scripts', ->
     entries: ['./app/router.coffee']
     extensions: ['.js', '.coffee', '.hbs']
 
-  bundler.transform(browserifyShim)
+  bundler
+    .transform(browserifyShim)
     .transform(coffeeify)
     .transform(emberHbsfy)
   bundle bundler
