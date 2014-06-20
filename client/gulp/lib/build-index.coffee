@@ -1,10 +1,11 @@
+gulp  = require 'gulp'
 gutil = require 'gulp-util'
 handlebars = require 'handlebars'
 through = require 'through2'
 
 PLUGIN_NAME = 'gulp-build-index'
 
-module.exports = (scripts, stylesheets)->
+build = (scripts, stylesheets)->
   through.obj (file, enc, callback)->
     if file.isStream()
       @emit 'error', new gutil.PluginError(PLUGIN_NAME,  'Streaming not supported')
@@ -24,3 +25,15 @@ module.exports = (scripts, stylesheets)->
 
     @push file
     callback()
+
+module.exports =
+
+  dev: ->
+    gulp.src('app/index.hbs')
+      .pipe build(['app.js'], ['app.css'])
+      .pipe gulp.dest('./_dev/')
+
+  prod: (cacheBuster)->
+    gulp.src('app/index.hbs')
+      .pipe build(["app-#{cacheBuster}.js"], ["app-#{cacheBuster}.css"])
+      .pipe gulp.dest('./_build/')
