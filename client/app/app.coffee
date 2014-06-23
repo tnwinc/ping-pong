@@ -1,3 +1,7 @@
 Ember = require 'ember'
 
-module.exports = Ember.Application.create()
+App = Ember.Application.create()
+
+App.NAMESPACE = 'ping-pong'
+
+module.exports = App
