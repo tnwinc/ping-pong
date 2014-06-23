@@ -1,20 +1,22 @@
-<button {{action 'save'}}>Save</button>
+<button class="save" {{action 'save'}}>Save</button>
 
-<fieldset>
+<fieldset class="server">
   <label>Server</label>
   {{input value=server}}
 </fieldset>
 
+<header>
+  <label>Name</label>
+  <label>URL</label>
+</header>
 <ul>
   {{#each sites}}
     <li>
-      <fieldset>
-        <label>Name</label>
+      <fieldset class="name">
         {{input value=name}}
       </fieldset>
 
-      <fieldset>
-        <label>URL</label>
+      <fieldset class="url">
         {{input value=url}}
       </fieldset>
 
@@ -23,6 +25,8 @@
   {{/each}}
 </ul>
 
-<button {{action 'addSite'}}>
-  <i class="fa fa-plus"></i>
-</button>
+<p class="add-site">
+  <button {{action 'addSite'}}>
+    <i class="fa fa-plus"></i>
+  </button>
+</p>

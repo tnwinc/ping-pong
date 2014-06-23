@@ -1,0 +1,89 @@
+.edit {
+  background: #333;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+
+  .save {
+    float: right;
+  }
+
+  .server {
+    margin-right: 80px;
+
+    label {
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      display: inline-block;
+      min-width: 300px;
+      width: 60%;
+    }
+  }
+
+  remove-buffer = 20px;
+
+  header {
+    clearfix();
+    margin: 20px 0 10px;
+    padding-right: remove-buffer;
+
+    label {
+      float: left;
+      width: 50%;
+    }
+  }
+
+  li {
+    clearfix();
+    padding-right: remove-buffer;
+    position: relative;
+
+    fieldset {
+      float: left;
+      margin-right: 2%;
+      width: 48%;
+    }
+
+    input {
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    button {
+      background: none;
+      color: #d3d3d3;
+      display: inline-block;
+      padding-right: 0;
+      padding-left: 0;
+      position: absolute;
+      right: 0;
+
+      &:hover,
+      &:focus {
+        color: #a4a4a4;
+      }
+    }
+  }
+
+  .add-site {
+    text-align: center;
+
+    button {
+      background: primary-color;
+      width: 100px;
+
+      &:hover,
+      &:focus {
+        background: darken(primary-color, 10%);
+      }
+    }
+  }
+}
