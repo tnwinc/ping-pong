@@ -1,13 +1,9 @@
 <ul>
   {{#each sites}}
-    <li>
-      {{#if available}}
-        <i class="fa fa-thumbs-o-up"></i>
-      {{else}}
-        <i class="fa fa-thumbs-down"></i>
-      {{/if}}
+    <li {{bind-attr class="available"}}>
+      <figure></figure>
 
-      {{displayName}}
+      <p>{{displayName}}</p>
     </li>
   {{/each}}
 </ul>
