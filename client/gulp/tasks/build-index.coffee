@@ -32,7 +32,6 @@ gulp.task 'build-dev', ->
     .pipe gulp.dest('./_dev/')
 
 gulp.task 'build-prod', ->
-# prod: (cacheBuster)->
   gulp.src('app/index.hbs')
-    .pipe build(["app-#{cacheBuster}.js"], ["app-#{cacheBuster}.css"])
+    .pipe build(["app.js"], ["app.css"])
     .pipe gulp.dest('./_build/')

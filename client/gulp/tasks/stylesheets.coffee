@@ -11,3 +11,8 @@ gulp.task 'watch-stylesheets', ->
       .pipe stylus(errors: true).on('error', handleErrors)
       .pipe gulp.dest('./_dev/')
   return
+
+gulp.task 'build-stylesheets', ->
+  gulp.src 'app/app.styl'
+    .pipe stylus(errors: true).on('error', handleErrors)
+    .pipe gulp.dest('./_build/')

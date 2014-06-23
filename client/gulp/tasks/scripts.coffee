@@ -38,3 +38,16 @@ gulp.task 'watch-scripts', ->
   bundler.on 'update', rebundle
 
   rebundle
+
+gulp.task 'build-scripts', ->
+  browserify(
+    entries: ['./app/router.coffee']
+    extensions: ['.js', '.coffee', '.hbs']
+  )
+    .transform(browserifyShim)
+    .transform(coffeeify)
+    .transform(emberHbsfy)
+    .bundle()
+    .on('error', handleErrors)
+    .pipe source('app.js')
+    .pipe gulp.dest('./_build/')
