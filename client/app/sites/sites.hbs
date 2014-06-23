@@ -1,5 +1,7 @@
-<h1>Is Working!</h1>
-{{#each}}
-  {{this}}..
-{{/each}}
-<p><i class="fa fa-rocket fa-5x"></i></p>
+<ul>
+  {{#each sites}}
+    <li>{{displayName}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}

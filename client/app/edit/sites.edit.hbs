@@ -1,0 +1,28 @@
+<button {{action 'save'}}>Save</button>
+
+<fieldset>
+  <label>Server</label>
+  {{input value=server}}
+</fieldset>
+
+<ul>
+  {{#each sites}}
+    <li>
+      <fieldset>
+        <label>Name</label>
+        {{input value=name}}
+      </fieldset>
+
+      <fieldset>
+        <label>URL</label>
+        {{input value=url}}
+      </fieldset>
+
+      <button {{action 'removeSite' this}}><i class="fa fa-times"></i></button>
+    </li>
+  {{/each}}
+</ul>
+
+<button {{action 'addSite'}}>
+  <i class="fa fa-plus"></i>
+</button>

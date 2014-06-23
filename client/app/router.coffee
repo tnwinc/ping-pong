@@ -4,8 +4,8 @@ require './services/store'
 
 require './index/route'
 require './sites/route'
-require './configure/route'
+require './edit/route'
 
 App.Router.map ->
-  @resource 'sites'
-  @route 'configure'
+  @resource 'sites', ->
+    @route 'edit'
