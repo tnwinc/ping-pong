@@ -2,6 +2,7 @@ Ember = require 'ember'
 App = require '../app'
 
 require './sites'
+require './controller'
 require './model'
 require './view'
 

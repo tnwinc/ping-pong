@@ -32,3 +32,52 @@ figure-size = 32px;
     }
   }
 }
+
+edit-size = 42px;
+
+.edit-surface {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: edit-size;
+  height: edit-size;
+
+  .editing & {
+    display: none;
+  }
+}
+
+a.edit {
+  &:before {
+    border-top: solid 25px rgba(255,255,255,0.3);
+    border-right: solid 25px rgba(255,255,255,0.3);
+    border-bottom: solid 25px transparent;
+    border-left: solid 25px transparent;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+  }
+
+  color: rgba(255,255,255,0.5);
+  display: none;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  width: edit-size - 14;
+  height: edit-size - 14;
+  line-height: edit-size - 14;
+
+  &:hover,
+  &:focus {
+    color: rgba(255,255,255,0.8);
+  }
+}
+
+.edit-surface:hover a.edit {
+  display: block;
+}
