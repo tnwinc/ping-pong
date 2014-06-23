@@ -12,16 +12,15 @@ gulpif = require 'gulp-if'
 source = require 'vinyl-source-stream'
 handleErrors = require '../lib/handle-errors'
 
-bundle = (bundler, destination)->
-  isDev = destination is '_dev'
+bundle = (bundler)->
   bundler
     .bundle()
     .on('error', handleErrors)
     .pipe source('app.js')
-    .pipe gulpif(isDev, gulp.dest("./#{destination}/"))
+    .pipe gulp.dest('./_dev/')
 
-setupBundler = (bundlify, destination)->
-  bundler = bundlify
+gulp.task 'watch-scripts', ->
+  bundler = watchify
     entries: ['./app/router.coffee']
     extensions: ['.js', '.coffee', '.hbs']
 
@@ -29,21 +28,13 @@ setupBundler = (bundlify, destination)->
     .transform(browserifyShim)
     .transform(coffeeify)
     .transform(emberHbsfy)
-  bundle bundler, destination
+  bundle bundler
 
-  bundler
+  rebundle = (files)->
+    for file in files
+      gutil.log gutil.colors.cyan('rebundle'), file.replace process.cwd(), ''
+    bundle bundler
 
-module.exports =
+  bundler.on 'update', rebundle
 
-  watch: ->
-    destination = '_dev'
-    bundler = setupBundler watchify, destination
-
-    rebundle = (files)->
-      for file in files
-        gutil.log gutil.colors.cyan('rebundle'), file.replace process.cwd(), ''
-      bundle bundler, destination
-
-    bundler.on 'update', rebundle
-
-    rebundle()
+  rebundle

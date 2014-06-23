@@ -26,14 +26,13 @@ build = (scripts, stylesheets)->
     @push file
     callback()
 
-module.exports =
+gulp.task 'build-dev', ->
+  gulp.src('app/index.hbs')
+    .pipe build(['app.js'], ['app.css'])
+    .pipe gulp.dest('./_dev/')
 
-  dev: ->
-    gulp.src('app/index.hbs')
-      .pipe build(['app.js'], ['app.css'])
-      .pipe gulp.dest('./_dev/')
-
-  prod: (cacheBuster)->
-    gulp.src('app/index.hbs')
-      .pipe build(["app-#{cacheBuster}.js"], ["app-#{cacheBuster}.css"])
-      .pipe gulp.dest('./_build/')
+gulp.task 'build-prod', ->
+# prod: (cacheBuster)->
+  gulp.src('app/index.hbs')
+    .pipe build(["app-#{cacheBuster}.js"], ["app-#{cacheBuster}.css"])
+    .pipe gulp.dest('./_build/')
