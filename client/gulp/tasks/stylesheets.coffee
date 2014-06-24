@@ -2,6 +2,7 @@ gulp = require 'gulp'
 watch = require 'gulp-watch'
 plumber = require 'gulp-plumber'
 stylus = require 'gulp-stylus'
+minify = require 'gulp-minify-css'
 handleErrors = require '../lib/handle-errors'
 
 gulp.task 'watch-stylesheets', ->
@@ -15,4 +16,5 @@ gulp.task 'watch-stylesheets', ->
 gulp.task 'build-stylesheets', ->
   gulp.src 'app/app.styl'
     .pipe stylus(errors: true).on('error', handleErrors)
+    .pipe minify()
     .pipe gulp.dest('./_build/')

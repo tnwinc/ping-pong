@@ -7,8 +7,8 @@ browserify = require 'browserify'
 browserifyShim = require 'browserify-shim'
 coffeeify = require 'coffeeify'
 emberHbsfy = require '../lib/ember-hbsfy'
+uglifyify = require 'uglifyify'
 
-gulpif = require 'gulp-if'
 source = require 'vinyl-source-stream'
 handleErrors = require '../lib/handle-errors'
 
@@ -47,6 +47,7 @@ gulp.task 'build-scripts', ->
     .transform(browserifyShim)
     .transform(coffeeify)
     .transform(emberHbsfy)
+    .transform({ global: true }, 'uglifyify')
     .bundle()
     .on('error', handleErrors)
     .pipe source('app.js')
