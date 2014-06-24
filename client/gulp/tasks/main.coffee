@@ -1,7 +1,6 @@
 gulp = require 'gulp'
-open = require 'open'
 server = require '../lib/server'
-config = require '../lib/load-config'
+deploy = require '../lib/deploy'
 
 devDeps = [
   'build-dev'
@@ -11,9 +10,8 @@ devDeps = [
 ]
 
 gulp.task 'dev', devDeps, ->
-  server '_dev', (port)->
-    unless config.openBrowser is false
-      open "http://localhost:#{port}"
+  server '_dev'
+
 
 prodDeps = [
   'build-prod'
@@ -23,8 +21,11 @@ prodDeps = [
 ]
 
 gulp.task 'prod', prodDeps, ->
-  server '_build', (port)->
-    unless config.openBrowser is false
-      open "http://localhost:#{port}"
+  server '_build'
+
+
+gulp.task 'deploy', prodDeps, ->
+  deploy()
+
 
 gulp.task 'default', ['dev']
