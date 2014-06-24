@@ -1,37 +1,21 @@
 gulp  = require 'gulp'
-gutil = require 'gulp-util'
-handlebars = require 'handlebars'
-through = require 'through2'
+fs = require 'fs'
+build = require '../lib/build-index'
 
-PLUGIN_NAME = 'gulp-build-index'
-
-build = (scripts, stylesheets)->
-  through.obj (file, enc, callback)->
-    if file.isStream()
-      @emit 'error', new gutil.PluginError(PLUGIN_NAME,  'Streaming not supported')
-      return callback()
-
-    try
-      template = handlebars.compile file.contents.toString()
-      compiled = template
-        scripts: scripts
-        stylesheets: stylesheets
-    catch err
-      @emit 'error', new gutil.PluginError(PLUGIN_NAME, err)
-      return callback()
-
-    file.path = gutil.replaceExtension file.path, '.html'
-    file.contents = new Buffer compiled
-
-    @push file
-    callback()
-
-gulp.task 'build-dev', ->
-  gulp.src('app/index.hbs')
+gulp.task 'dev-index', ->
+  gulp.src 'app/index.hbs'
     .pipe build(['app.js'], ['app.css'])
     .pipe gulp.dest('./_dev/')
 
-gulp.task 'build-prod', ->
-  gulp.src('app/index.hbs')
-    .pipe build(["app.js"], ["app.css"])
+scriptsManifest = '_build/scripts-manifest.json'
+stylesheetsManifest = '_build/stylesheets-manifest.json'
+
+gulp.task 'prod-index', ['build-scripts', 'build-stylesheets'], ->
+  scriptName = JSON.parse(fs.readFileSync(scriptsManifest))['app.js']
+  stylesheetName = JSON.parse(fs.readFileSync(stylesheetsManifest))['app.css']
+  fs.unlinkSync scriptsManifest
+  fs.unlinkSync stylesheetsManifest
+
+  gulp.src 'app/index.hbs'
+    .pipe build([scriptName], [stylesheetName])
     .pipe gulp.dest('./_build/')

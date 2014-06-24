@@ -3,6 +3,8 @@ watch = require 'gulp-watch'
 plumber = require 'gulp-plumber'
 stylus = require 'gulp-stylus'
 minify = require 'gulp-minify-css'
+rev = require 'gulp-rev'
+rename = require 'gulp-rename'
 handleErrors = require '../lib/handle-errors'
 
 gulp.task 'watch-stylesheets', ->
@@ -13,8 +15,12 @@ gulp.task 'watch-stylesheets', ->
       .pipe gulp.dest('./_dev/')
   return
 
-gulp.task 'build-stylesheets', ->
+gulp.task 'build-stylesheets', ['clean'], ->
   gulp.src 'app/app.styl'
     .pipe stylus(errors: true).on('error', handleErrors)
     .pipe minify()
+    .pipe rev()
+    .pipe gulp.dest('./_build/')
+    .pipe rev.manifest()
+    .pipe rename('stylesheets-manifest.json')
     .pipe gulp.dest('./_build/')

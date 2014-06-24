@@ -3,10 +3,10 @@ server = require '../lib/server'
 deploy = require '../lib/deploy'
 
 devDeps = [
-  'build-dev'
   'watch-scripts'
   'watch-stylesheets'
   'watch-static'
+  'dev-index'
 ]
 
 gulp.task 'dev', devDeps, ->
@@ -14,18 +14,20 @@ gulp.task 'dev', devDeps, ->
 
 
 prodDeps = [
-  'build-prod'
   'build-scripts'
   'build-stylesheets'
   'copy-static'
+  'prod-index'
 ]
 
-gulp.task 'prod', prodDeps, ->
+gulp.task 'build', prodDeps
+
+gulp.task 'prod', ['build'], ->
   server '_build'
 
-
-gulp.task 'deploy', prodDeps, ->
+gulp.task 'deploy', ['build'], ->
   deploy()
 
 
 gulp.task 'default', ['dev']
+

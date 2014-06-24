@@ -1,5 +1,7 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+rev = require 'gulp-rev'
+rename = require 'gulp-rename'
 
 watchify = require 'watchify'
 browserify = require 'browserify'
@@ -39,7 +41,7 @@ gulp.task 'watch-scripts', ->
 
   rebundle
 
-gulp.task 'build-scripts', ->
+gulp.task 'build-scripts', ['clean'], ->
   browserify(
     entries: ['./app/router.coffee']
     extensions: ['.js', '.coffee', '.hbs']
@@ -51,4 +53,8 @@ gulp.task 'build-scripts', ->
     .bundle()
     .on('error', handleErrors)
     .pipe source('app.js')
+    .pipe rev()
+    .pipe gulp.dest('./_build/')
+    .pipe rev.manifest()
+    .pipe rename('scripts-manifest.json')
     .pipe gulp.dest('./_build/')
