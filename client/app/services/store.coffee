@@ -4,42 +4,22 @@ App = require '../app'
 Store = Ember.Object.extend
 
   init: ->
-    data = localStorage[App.NAMESPACE]
-    @cache = JSON.parse(data || '{}')
+    @data = JSON.parse(localStorage[App.NAMESPACE] or '{}')
 
-  getValue: (key, defaultValue)->
-    unless @cache[key]?
-      @cache[key] = defaultValue
-    @cache[key]
-
-  updateNumber: (key, value, defaultValue)->
-    if _.isNaN Number(value)
-      value = defaultValue
-    @save key, value
-
-  updateString: (key, value, defaultValue)->
-    if not _.isString(value) or $.trim(value) is ''
-      value = defaultValue
-    @save key, value
-
-  updateValue: (key, value)->
-    @save key, value
+  fetch: (key)->
+    @data[key]
 
   save: (key, value)->
-    @cache[key] = value
-    localStorage[App.NAMESPACE] = JSON.stringify @cache
+    @data[key] = value
+    localStorage[App.NAMESPACE] = JSON.stringify @data
     value
 
 Ember.Application.initializer
   name: 'store'
 
-  initialize: (container)->
+  initialize: (container, application)->
     container.register 'store:main', Store
 
-Ember.Application.initializer
-  name: 'injectStore'
-  before: 'store'
-
-  initialize: (container, application)->
     application.inject 'controller', 'store', 'store:main'
     application.inject 'route', 'store', 'store:main'
+    application.inject 'migrator', 'store', 'store:main'

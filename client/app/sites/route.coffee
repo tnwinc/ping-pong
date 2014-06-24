@@ -14,8 +14,8 @@ App.SitesRoute = Ember.Route.extend
 
   model: ->
     App.Site.create
-      server: @store.getValue 'server'
-      sites: App.Site.deserialize (@store.getValue('sites') or [])
+      server: @store.fetch 'server'
+      sites: App.Site.deserialize (@store.fetch('sites') or [])
 
   setupController: (controller, model)->
     @_super controller, model

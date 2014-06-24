@@ -14,6 +14,6 @@ App.SitesEditController = Ember.ObjectController.extend
       @get('sites').removeObject site
 
     save: ->
-      @store.updateValue 'server', @get('server')
-      @store.updateValue 'sites', App.Site.serialize(@get 'sites')
+      @store.save 'server', @get('server')
+      @store.save 'sites', App.Site.serialize(@get 'sites')
       @transitionToRoute 'sites'
