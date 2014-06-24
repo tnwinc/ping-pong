@@ -4,7 +4,6 @@ App = require '../app'
 require './sites'
 require './controller'
 require './model'
-require './view'
 
 App.SitesRoute = Ember.Route.extend
 

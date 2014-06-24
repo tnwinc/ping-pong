@@ -1,31 +1,31 @@
 figure-size = 32px;
 
 .sites {
-  padding: 15px;
+  margin: 5px 10px;
 
   li {
     clearfix();
-    margin: 10px 0;
 
     figure {
+      background-image: linear-gradient(145deg, rgba(255,255,255,.2), transparent);
       background-color: error-color;
-      border: solid 3px darken(error-color, 20%);
+      border: solid 3px darken(error-color, 40%);
       border-radius: 50%;
       box-sizing: border-box;
       float: left;
+      margin-top: 5px;
       width: figure-size;
       height: figure-size;
     }
 
     &.available figure {
       background-color: success-color;
-      border-color: darken(success-color, 20%);
+      border-color: darken(success-color, 40%);
     }
 
     p {
       font-size: 1.2em;
-      line-height: figure-size;
-      margin: 0 0 0 figure-size + 10;
+      margin: 2px 0 2px figure-size + 10;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
