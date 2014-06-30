@@ -2,10 +2,10 @@
   "name": "ping-pong-client",
   "version": "0.0.1",
   "devDependencies": {
-    "gulp": "~3.8.2",
+    "gulp": "~3.8.5",
     "handlebars": "~1.1.2",
     "jquery": "~2.1.1",
-    "zunder": "0.0.4"
+    "zunder": "0.1.0"
   },
   "browser": {
     "ember": "./app/vendor/ember.js"
