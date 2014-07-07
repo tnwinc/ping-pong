@@ -22,4 +22,3 @@ Ember.Application.initializer
 
     application.inject 'controller', 'store', 'store:main'
     application.inject 'route', 'store', 'store:main'
-    application.inject 'migrator', 'store', 'store:main'

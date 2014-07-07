@@ -1,6 +1,5 @@
 Ember = require 'ember'
 App = require '../../app'
-manifest = require './manifest'
 VersionAssistant = require './version_assistant'
 migrations = require './manifest'
 
